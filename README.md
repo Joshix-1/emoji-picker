@@ -1,3 +1,5 @@
+install dmenu + python3
+
 Install requirements from requirements.txt (later versions should work fine too)
 
 run generate_data.py before running emoji_picker.py
