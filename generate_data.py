@@ -15,7 +15,7 @@ for emoji, data in EMOJI_DATA.items():
                 data_list.extend(_d)
             else:
                 data_list.append(_d)
-    to_write.append(f"{emoji}: " +  ", ".join(spam.strip(":") for spam in data_list))
+    to_write.append(f"{emoji}: " +  ", ".join(spam.strip(":").lower() for spam in data_list))
 
 sorted(to_write)
 
