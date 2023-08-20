@@ -3,20 +3,26 @@
 from emoji import EMOJI_DATA
 from pathlib import Path
 
-LANGUAGES = ["de", "en", "alias"]
 
-to_write: list[str] = []
+LANGUAGES = ("de", "en", "alias")
+
+def normalize(emoji: str) -> str:
+    return emoji.strip(":").lower()
+
+emojis: dict[str, set[str]] = {}
 
 for emoji, data in EMOJI_DATA.items():
-    data_list = []
+    names = emojis.setdefault(emoji, set())
     for lang in LANGUAGES:
-        if _d := data.get(lang):
-            if isinstance(_d, list):
-                data_list.extend(_d)
-            else:
-                data_list.append(_d)
-    to_write.append(f"{emoji}: " +  ", ".join(spam.strip(":").lower() for spam in data_list))
+        if _n := data.get(lang):
+            if isinstance(_n, str):
+                _n = [_n]
+            names.update(map(normalize, _n))
 
-sorted(to_write)
 
-Path("emoji_data.txt").write_text("\n".join(to_write), "utf-8")
+to_write: list[str] = [
+    (f"{emoji}: " +  ", ".join(sorted(spam for spam in names)))
+    for emoji, names in emojis.items()
+]
+
+Path("emoji_data.txt").write_text("\n".join(sorted(to_write)) + "\n", "utf-8")
