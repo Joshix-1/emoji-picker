@@ -6,13 +6,17 @@ import pyperclip3
 from os.path import dirname, abspath, join
 
 DIR = dirname(abspath(__file__))
+FONT = "Noto Color Emoji"
+
+
+COMMAND = ["dmenu", "-l", "10"]
 
 result = run(
-    ["dmenu", "-l", "10"],
+    COMMAND + (["-fn", FONT] if FONT else []),
     stdin=open(join(DIR, "emoji_data.txt"), "r"),
     encoding="utf-8",
     capture_output=True,
-    check=False,
+    check=True,
 )
 
 emoji = result.stdout.split(":")[0] if ":" in result.stdout else result.stdout
