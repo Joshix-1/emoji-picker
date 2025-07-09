@@ -1,4 +1,4 @@
-install dmenu + python3
+install rofi + python3
 
 Install requirements from requirements.txt (later versions should work fine too)
 

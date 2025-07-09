@@ -6,10 +6,10 @@ import pyperclip3
 from os.path import dirname, abspath, join
 
 DIR = dirname(abspath(__file__))
-FONT = "Noto Color Emoji"
+FONT = "Noto Sans,Noto Color Emoji" # "Noto Color Emoji"
 
 
-COMMAND = ["dmenu", "-l", "10"]
+COMMAND = ["rofi", "-dmenu", "-l", "10"]
 
 result = run(
     COMMAND + (["-fn", FONT] if FONT else []),

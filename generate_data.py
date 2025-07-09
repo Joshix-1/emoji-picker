@@ -3,7 +3,6 @@
 from emoji import EMOJI_DATA
 from pathlib import Path
 
-
 LANGUAGES = ("de", "en", "alias")
 
 def normalize(emoji: str) -> str:
@@ -18,7 +17,6 @@ for emoji, data in EMOJI_DATA.items():
             if isinstance(_n, str):
                 _n = [_n]
             names.update(map(normalize, _n))
-
 
 to_write: list[str] = [
     (f"{emoji}: " +  ", ".join(sorted(spam for spam in names)))
